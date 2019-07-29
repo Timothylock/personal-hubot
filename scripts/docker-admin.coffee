@@ -3,7 +3,7 @@ module.exports = (robot) ->
     @exec = require('child_process').exec
     msg.send "Killing docker containers..."
 
-    @exec "sh /home/timothy/service-monolith/killAll.sh", (error, stdout, stderr) -> 
+    @exec "cd /home/timothy/service-monolith && sh /home/timothy/service-monolith/killAll.sh", (error, stdout, stderr) -> 
         if error
             msg.send "```\n" + error + "```"
             msg.send "```\n" + stderr + "```"
@@ -11,7 +11,7 @@ module.exports = (robot) ->
             msg.send "```\n" + stdout + "```"
 
             msg.send "Starting containers..."
-            @exec "sh /home/timothy/service-monolith/startServer.sh", (error, stdout, stderr) -> 
+            @exec "cd /home/timothy/service-monolith && sh /home/timothy/service-monolith/startServer.sh", (error, stdout, stderr) -> 
             if error
                 msg.send "```\n" + error + "```"
                 msg.send "```\n" + stderr + "```"
@@ -21,8 +21,8 @@ module.exports = (robot) ->
 
   robot.respond /docker start/, (msg) ->
     @exec = require('child_process').exec
-    msg.send "Killing docker containers..."
-    @exec "sh /home/timothy/service-monolith/startServer.sh", (error, stdout, stderr) -> 
+    msg.send "starting docker containers..."
+    @exec "cd /home/timothy/service-monolith && sh /home/timothy/service-monolith/startServer.sh", (error, stdout, stderr) -> 
     if error
         msg.send "```\n" + error + "```"
         msg.send "```\n" + stderr + "```"
@@ -34,7 +34,7 @@ module.exports = (robot) ->
     @exec = require('child_process').exec
     msg.send "Updating docker containers with their newest images..."
 
-    @exec "sh /home/timothy/service-monolith/updateServer.sh", (error, stdout, stderr) -> 
+    @exec "cd /home/timothy/service-monolith && sh /home/timothy/service-monolith/updateServer.sh", (error, stdout, stderr) -> 
         if error
             msg.send "```\n" + error + "```"
             msg.send "```\n" + stderr + "```"
