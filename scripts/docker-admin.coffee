@@ -5,18 +5,18 @@ module.exports = (robot) ->
 
     @exec "sh /home/timothy/service-monolith/killAll.sh", (error, stdout, stderr) -> 
         if error
-            msg.send "```" + error + "```"
-            msg.send "```" + stderr + "```"
+            msg.send "```\n" + error + "```"
+            msg.send "```\n" + stderr + "```"
         else
-            msg.send "```" + stdout + "```"
+            msg.send "```\n" + stdout + "```"
 
             msg.send "Starting containers..."
             @exec "sh /home/timothy/service-monolith/startServer.sh", (error, stdout, stderr) -> 
             if error
-                msg.send "```" + error + "```"
-                msg.send "```" + stderr + "```"
+                msg.send "```\n" + error + "```"
+                msg.send "```\n" + stderr + "```"
             else
-                msg.send "```" + stdout + "```"
+                msg.send "```\n" + stdout + "```"
                 msg.send "Completed! W00t!"
 
   robot.respond /docker update/, (msg) ->
@@ -25,19 +25,18 @@ module.exports = (robot) ->
 
     @exec "sh /home/timothy/service-monolith/updateServer.sh", (error, stdout, stderr) -> 
         if error
-            msg.send "```" + error + "```"
-            msg.send "```" + stderr + "```"
+            msg.send "```\n" + error + "```"
+            msg.send "```\n" + stderr + "```"
         else
-            msg.send "```" + stdout + "```"
+            msg.send "```\n" + stdout + "```"
             msg.send "Complete!"
 
   robot.respond /docker ps/, (msg) ->
     @exec = require('child_process').exec
-    msg.send "Updating docker containers with their newest images..."
 
     @exec "docker ps", (error, stdout, stderr) -> 
         if error
-            msg.send "```" + error + "```"
-            msg.send "```" + stderr + "```"
+            msg.send "```\n" + error + "```"
+            msg.send "```\n" + stderr + "```"
         else
-            msg.send "```" + stdout + "```"
+            msg.send "```\n" + stdout + "```"
