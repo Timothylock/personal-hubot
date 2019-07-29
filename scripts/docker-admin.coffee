@@ -19,6 +19,17 @@ module.exports = (robot) ->
                 msg.send "```\n" + stdout + "```"
                 msg.send "Completed! W00t!"
 
+  robot.respond /docker start/, (msg) ->
+    @exec = require('child_process').exec
+    msg.send "Killing docker containers..."
+    @exec "sh /home/timothy/service-monolith/startServer.sh", (error, stdout, stderr) -> 
+    if error
+        msg.send "```\n" + error + "```"
+        msg.send "```\n" + stderr + "```"
+    else
+        msg.send "```\n" + stdout + "```"
+        msg.send "Completed! W00t!"
+
   robot.respond /docker update/, (msg) ->
     @exec = require('child_process').exec
     msg.send "Updating docker containers with their newest images..."
