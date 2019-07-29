@@ -30,3 +30,14 @@ module.exports = (robot) ->
         else
             msg.send "```" + stdout + "```"
             msg.send "Complete!"
+
+  robot.respond /docker ps/, (msg) ->
+    @exec = require('child_process').exec
+    msg.send "Updating docker containers with their newest images..."
+
+    @exec "docker ps", (error, stdout, stderr) -> 
+        if error
+            msg.send "```" + error + "```"
+            msg.send "```" + stderr + "```"
+        else
+            msg.send "```" + stdout + "```"
